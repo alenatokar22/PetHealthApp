@@ -73,6 +73,24 @@ export default function PetHealthApp() {
           </button>
         </form>
       </main>
+      {pets.map((pet) => (
+        <li key={pet.id} className="pet-card">
+          <div>
+            <strong>{pet.name}</strong> <br />
+            <span className="muted">{pet.species || "—"}</span>
+          </div>
+          <div className="pet-age">
+            {new Date(pet.birth).toLocaleDateString()} <br />
+            <small>({calcAge(pet.birth)} р.)</small>
+          </div>
+          <button
+            className="btn-del"
+            onClick={() => setPets(pets.filter((p) => p.id !== pet.id))}
+          >
+            ❌
+          </button>
+        </li>
+      ))}
     </div>
   );
 }
