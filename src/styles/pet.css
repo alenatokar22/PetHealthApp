@@ -1,0 +1,51 @@
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --accent: #10b981;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --radius: 12px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.pet-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-header {
+  text-align: center;
+  padding: 20px;
+}
+
+.pet-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.pet-sub {
+  color: var(--muted);
+}
+
+.pet-main {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+.pet-footer {
+  text-align: center;
+  padding: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
