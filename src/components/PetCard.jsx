@@ -28,7 +28,7 @@ export default function PetCard({ pet, onDelete, onSelect }) {
           onDelete(pet.id);
         }}
       >
-        ❌
+        🗑️
       </button>
     </li>
   );

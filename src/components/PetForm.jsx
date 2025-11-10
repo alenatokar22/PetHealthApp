@@ -5,7 +5,7 @@ import React, { useState } from "react";
 export default function PetForm({ onAdd }) {
   const [form, setForm] = useState({ name: "", species: "", birth: "" });
 
-  const handleSubmit = (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.birth) return;
 
@@ -20,7 +20,8 @@ export default function PetForm({ onAdd }) {
   };
 
   return (
-    <form className="pet-form" onSubmit={handleSubmit}>
+    <form className="pet-form" onSubmit={handleSave}>
+      <h2 className="form-title">Додати улюбленця</h2>
       <input
         placeholder="Ім'я"
         value={form.name}
@@ -32,14 +33,15 @@ export default function PetForm({ onAdd }) {
         value={form.species}
         onChange={(e) => setForm({ ...form, species: e.target.value })}
       />
+      <label className="form-label">Дата народження:</label>
       <input
         type="date"
         value={form.birth}
         onChange={(e) => setForm({ ...form, birth: e.target.value })}
         required
       />
-      <button type="submit" className="btn-add">
-        Додати тварину
+      <button type="submit" className="btn-save">
+        💾 Зберегти
       </button>
     </form>
   );

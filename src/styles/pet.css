@@ -1,130 +1,154 @@
+:root {
+  --bg: #f4f7fb;
+  --text: #0f172a;
+  --accent: #3b82f6;
+  --muted: #64748b;
+  --card: #fff;
+  --radius: 14px;
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  --transition: 0.2s ease;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.pet-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.pet-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.pet-title {
+  font-size: 1.8rem;
+  color: var(--accent);
+  margin: 0;
+}
+
+.pet-main {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ---------- список ---------- */
+.pet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
 .pet-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 12px;
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  margin-bottom: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.pet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.btn-del {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+/* ---------- форма ---------- */
 .pet-form {
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: var(--card);
-  padding: 14px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  max-width: 400px;
-  margin: 20px auto;
+  gap: 10px;
 }
 
-.btn-add {
-  background: var(--accent);
-  color: white;
-  border: none;
+.form-title {
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.pet-form input {
   padding: 10px;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
+  font-size: 1rem;
 }
 
-.pet-age {
-  text-align: right;
+.form-label {
   color: var(--muted);
   font-size: 0.9rem;
 }
 
-.btn-del {
-  background: transparent;
+.btn-save {
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
   border: none;
-  color: var(--danger, #ef4444);
+  border-radius: 8px;
+  padding: 10px;
   cursor: pointer;
-  font-size: 1.2rem;
-  margin-left: 8px;
+  transition: background var(--transition);
 }
 
-.pet-list {
-  list-style: none;
-  padding: 0;
-  max-width: 420px;
-  margin: 0 auto;
+.btn-save:hover {
+  background: #2563eb;
 }
 
-.pet-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 12px;
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 10px;
-}
-
-.btn-add {
+.btn-edit {
   background: var(--accent);
   color: white;
   border: none;
-  padding: 10px;
+  padding: 10px 14px;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: 600;
-}
-
-.btn-del {
-  background: transparent;
-  border: none;
-  color: var(--danger, #ef4444);
+  margin-top: 16px;
   cursor: pointer;
-  font-size: 1.2rem;
-  margin-left: 8px;
+  transition: background 0.2s ease;
 }
 
-.pet-details {
-  background: var(--card);
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  max-width: 420px;
-  margin: 0 auto;
-  text-align: center;
+.btn-edit:hover {
+  background: #2563eb;
 }
 
-.btn-back {
-  background: transparent;
-  border: none;
-  color: var(--accent);
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.pet-icon {
-  font-size: 3rem;
-  margin: 10px 0;
-}
-
-.pet-info {
-  width: 100%;
-  border-collapse: collapse;
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
   margin-top: 10px;
 }
 
-.pet-info td {
+.edit-form input {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   padding: 8px;
-  border-bottom: 1px solid #f1f5f9;
-  text-align: left;
+  font-size: 1rem;
 }
 
-.pet-info td:first-child {
+.edit-form label {
+  font-size: 0.9rem;
   color: var(--muted);
-  width: 45%;
-}
-
-.pet-name {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
 }
