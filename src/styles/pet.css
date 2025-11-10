@@ -1,12 +1,11 @@
 :root {
-  --bg: #f4f7fb;
-  --text: #0f172a;
-  --accent: #3b82f6;
-  --muted: #64748b;
+  --bg: #f7f9fc;
   --card: #fff;
+  --accent: #3b82f6;
+  --text: #0f172a;
+  --muted: #64748b;
   --radius: 14px;
-  --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  --transition: 0.2s ease;
+  --shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
 body {
@@ -14,7 +13,6 @@ body {
   color: var(--text);
   font-family: "Inter", system-ui, sans-serif;
   margin: 0;
-  min-height: 100vh;
 }
 
 .pet-app {
@@ -23,132 +21,263 @@ body {
   align-items: center;
   padding: 20px;
 }
+.pet-main {
+  width: 100%;
+  max-width: 460px;
+}
 
+/* Заголовок */
 .pet-header {
   text-align: center;
   margin-bottom: 10px;
 }
-
 .pet-title {
-  font-size: 1.8rem;
   color: var(--accent);
-  margin: 0;
+  font-size: 1.6rem;
 }
 
-.pet-main {
-  width: 100%;
-  max-width: 480px;
+/* Кнопка */
+.add-bar {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.btn-add-pet {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.btn-add-pet:hover {
+  background: #2563eb;
 }
 
-/* ---------- список ---------- */
-.pet-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
+/* Форма */
+.form-section {
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
 }
-
-.pet-card {
+.section-title {
+  text-align: center;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.pet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pet-form input {
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.form-buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
+}
+.btn-save {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.btn-cancel {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Список */
+.pet-card {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   background: var(--card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 14px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  transition: 0.2s ease;
 }
-
 .pet-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+.pet-icon {
+  font-size: 1.6rem;
+}
+
+.pet-info {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.pet-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pet-birth {
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-del {
   background: transparent;
   border: none;
   color: #ef4444;
+  font-size: 1.2rem;
   cursor: pointer;
-  font-size: 1.3rem;
 }
 
-/* ---------- форма ---------- */
-.pet-form {
+/* --- Гарна форма --- */
+.pet-form.fancy {
   background: var(--card);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 18px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+.form-header {
+  text-align: center;
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 6px 10px;
+  transition: 0.2s;
+}
+.form-group:focus-within {
+  border-color: var(--accent);
+  background: #f0f7ff;
+}
+
+.form-icon {
+  color: var(--muted);
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+.form-group input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.95rem;
+  padding: 6px 0;
+}
+
+/* --- Кнопки --- */
+.form-buttons.modern {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
   gap: 10px;
 }
 
-.form-title {
-  text-align: center;
-  margin-bottom: 8px;
-  color: var(--accent);
-}
-
-.pet-form input {
-  padding: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-.form-label {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.btn-save {
+.btn-primary {
+  flex: 1;
   background: var(--accent);
-  color: white;
-  font-weight: 600;
+  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 10px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: 0.2s;
 }
-
-.btn-save:hover {
+.btn-primary:hover {
   background: #2563eb;
 }
 
-.btn-edit {
-  background: var(--accent);
-  color: white;
+.btn-secondary {
+  flex: 1;
+  background: #f3f4f6;
   border: none;
-  padding: 10px 14px;
   border-radius: 8px;
+  color: var(--muted);
   font-weight: 600;
-  margin-top: 16px;
+  padding: 10px;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+/* --- анімація появи форми --- */
+.appear {
+  animation: fadeSlide 0.3s ease;
+}
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- гарні кнопки всередині форми --- */
+.form-buttons.clean {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+.btn-save {
+  flex: 1;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.btn-save:hover {
+  transform: scale(1.03);
+}
+.btn-cancel {
+  flex: 1;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  color: #64748b;
+  font-weight: 600;
+  padding: 10px;
   cursor: pointer;
   transition: background 0.2s ease;
 }
-
-.btn-edit:hover {
-  background: #2563eb;
-}
-
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: left;
-  margin-top: 10px;
-}
-
-.edit-form input {
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 8px;
-  font-size: 1rem;
-}
-
-.edit-form label {
-  font-size: 0.9rem;
-  color: var(--muted);
+.btn-cancel:hover {
+  background: #e2e8f0;
 }

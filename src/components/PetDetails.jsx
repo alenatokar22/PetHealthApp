@@ -1,82 +1,56 @@
 // деталі тварини
 
-import React, { useState } from "react";
+import React from "react";
 
-export default function PetDetails({ pet, onBack, onEdit, onSave, editing }) {
-  const [form, setForm] = useState({ ...pet });
-
-  const handleSave = (e) => {
-    e.preventDefault();
-    onSave(form);
-  };
+export default function PetDetails({ pet, onBack }) {
+  const age = pet.birth
+    ? Math.floor(
+        (Date.now() - new Date(pet.birth)) / (365 * 24 * 60 * 60 * 1000)
+      )
+    : null;
 
   return (
     <div className="pet-details">
       <button className="btn-back" onClick={onBack}>
         ← Назад
       </button>
-      <div className="pet-icon">🐾</div>
-      <h2 className="pet-name">{form.name}</h2>
 
-      {!editing ? (
-        <>
-          <table className="pet-info">
-            <tbody>
-              <tr>
-                <td>Стать:</td>
-                <td>{form.gender || "—"}</td>
-              </tr>
-              <tr>
-                <td>Порода:</td>
-                <td>{form.species || "—"}</td>
-              </tr>
-              <tr>
-                <td>Колір:</td>
-                <td>{form.color || "—"}</td>
-              </tr>
-              <tr>
-                <td>Вага:</td>
-                <td>{form.weight || "—"}</td>
-              </tr>
-              <tr>
-                <td>Дата народження:</td>
-                <td>{new Date(form.birth).toLocaleDateString()}</td>
-              </tr>
-            </tbody>
-          </table>
+      <div className="pet-icon-large">🦜</div>
+      <h2 className="pet-name-title">{pet.name}</h2>
 
-          <button className="btn-edit" onClick={onEdit}>
-            ✏️ Редагувати
-          </button>
-        </>
-      ) : (
-        <form className="edit-form" onSubmit={handleSave}>
-          <label>Стать:</label>
-          <input
-            value={form.gender || ""}
-            onChange={(e) => setForm({ ...form, gender: e.target.value })}
-          />
-          <label>Порода:</label>
-          <input
-            value={form.species || ""}
-            onChange={(e) => setForm({ ...form, species: e.target.value })}
-          />
-          <label>Колір:</label>
-          <input
-            value={form.color || ""}
-            onChange={(e) => setForm({ ...form, color: e.target.value })}
-          />
-          <label>Вага (кг):</label>
-          <input
-            type="number"
-            value={form.weight || ""}
-            onChange={(e) => setForm({ ...form, weight: e.target.value })}
-          />
-          <button type="submit" className="btn-save">
-            💾 Зберегти
-          </button>
-        </form>
-      )}
+      <h3 className="info-title">Про улюбленця:</h3>
+      <table className="pet-info-table">
+        <tbody>
+          <tr>
+            <td>Порода:</td>
+            <td>{pet.species || "—"}</td>
+          </tr>
+          <tr>
+            <td>Колір:</td>
+            <td>{pet.color || "—"}</td>
+          </tr>
+          <tr>
+            <td>Стать:</td>
+            <td>{pet.gender || "—"}</td>
+          </tr>
+          <tr>
+            <td>Вага (кг):</td>
+            <td>{pet.weight || "—"}</td>
+          </tr>
+          <tr>
+            <td>Дата народження:</td>
+            <td>{new Date(pet.birth).toLocaleDateString()}</td>
+          </tr>
+          {age !== null && (
+            <tr>
+              <td>Вік:</td>
+              <td>{age} р.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <button className="btn-notes">📝 Нотатки</button>
     </div>
   );
 }

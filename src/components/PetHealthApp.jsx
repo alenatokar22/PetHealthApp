@@ -1,81 +1,94 @@
-// головний компонент (керує станом)
-
+// PetHealthApp.jsx
 import React, { useState, useEffect } from "react";
-import PetForm from "./PetForm";
 import PetList from "./PetList";
+import PetForm from "./PetForm";
 import PetDetails from "./PetDetails";
 import "../styles/pet.css";
 
 export default function PetHealthApp() {
-  const [pets, setPets] = useState([]);
-  const [selectedPet, setSelectedPet] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-
-  // --- стабільне зчитування LocalStorage ---
-  useEffect(() => {
+  // lazy init — читаємо localStorage один раз при ініціалізації state
+  const [pets, setPets] = useState(() => {
     try {
-      const saved = localStorage.getItem("pets");
-      if (saved) setPets(JSON.parse(saved));
+      const raw = localStorage.getItem("pets");
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
     } catch (e) {
-      console.error("Помилка читання localStorage", e);
+      console.error("Помилка парсингу localStorage при ініціалізації:", e);
+      return [];
     }
-  }, []);
+  });
 
-  // --- стабільне збереження ---
+  const [selectedPet, setSelectedPet] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  // Зберігаємо pets у localStorage коли pets змінюється
   useEffect(() => {
     try {
       localStorage.setItem("pets", JSON.stringify(pets));
     } catch (e) {
-      console.error("Помилка збереження localStorage", e);
+      console.error("Помилка збереження в localStorage:", e);
     }
   }, [pets]);
 
-  const handleAddPet = (pet) => setPets([...pets, pet]);
+  // Безпечні оновлення state через функціональний setState
+  const handleAddPet = (pet) => {
+    setPets((prev) => {
+      const updated = [...prev, pet];
+      return updated;
+    });
+    setShowForm(false);
+  };
+
   const handleDeletePet = (id) => {
-    setPets(pets.filter((p) => p.id !== id));
-    setSelectedPet(null);
+    setPets((prev) => prev.filter((p) => p.id !== id));
+    // Якщо видалили вибрану тварину — збросимо selected
+    setSelectedPet((prev) => (prev && prev.id === id ? null : prev));
   };
 
-  const handleSelectPet = (pet) => {
-    setSelectedPet(pet);
-    setIsEditing(false);
-  };
-
-  const handleBack = () => {
-    setSelectedPet(null);
-    setIsEditing(false);
-  };
-
-  const handleSaveEdit = (updatedPet) => {
-    setPets(pets.map((p) => (p.id === updatedPet.id ? updatedPet : p)));
-    setSelectedPet(updatedPet);
-    setIsEditing(false);
-  };
+  const handleSelectPet = (pet) => setSelectedPet(pet);
+  const handleBack = () => setSelectedPet(null);
 
   return (
     <div className="pet-app">
       <header className="pet-header">
-        <h1 className="pet-title">🐾 Мої улюбленці</h1>
+        <h1 className="pet-title">🦜 Мої улюбленці</h1>
       </header>
 
       <main className="pet-main">
         {!selectedPet ? (
           <>
-            <PetList
-              pets={pets}
-              onDelete={handleDeletePet}
-              onSelect={handleSelectPet}
-            />
-            <PetForm onAdd={handleAddPet} />
+            <div className="add-bar">
+              {!showForm && (
+                <button
+                  className="btn-add-pet"
+                  onClick={() => setShowForm(true)}
+                >
+                  ➕ Додати улюбленця
+                </button>
+              )}
+            </div>
+
+            {showForm ? (
+              <section className="form-section appear">
+                <h2 className="section-title">
+                  📋 Форма для додавання улюбленця
+                </h2>
+                <PetForm
+                  onAdd={handleAddPet}
+                  onCancel={() => setShowForm(false)}
+                />
+              </section>
+            ) : (
+              <PetList
+                pets={pets}
+                onDelete={handleDeletePet}
+                onSelect={handleSelectPet}
+              />
+            )}
           </>
         ) : (
-          <PetDetails
-            pet={selectedPet}
-            onBack={handleBack}
-            onEdit={() => setIsEditing(true)}
-            onSave={handleSaveEdit}
-            editing={isEditing}
-          />
+          <PetDetails pet={selectedPet} onBack={handleBack} />
         )}
       </main>
     </div>
