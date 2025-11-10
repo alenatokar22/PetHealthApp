@@ -10,9 +10,9 @@ function calcAge(birth) {
   return months < 0 ? years - 1 : years;
 }
 
-export default function PetCard({ pet, onDelete }) {
+export default function PetCard({ pet, onDelete, onSelect }) {
   return (
-    <li className="pet-card">
+    <li className="pet-card" onClick={() => onSelect(pet)}>
       <div>
         <strong>{pet.name}</strong> <br />
         <span className="muted">{pet.species || "—"}</span>
@@ -21,7 +21,13 @@ export default function PetCard({ pet, onDelete }) {
         {new Date(pet.birth).toLocaleDateString()} <br />
         <small>({calcAge(pet.birth)} р.)</small>
       </div>
-      <button className="btn-del" onClick={() => onDelete(pet.id)}>
+      <button
+        className="btn-del"
+        onClick={(e) => {
+          e.stopPropagation(); // щоб не відкривались деталі при видаленні
+          onDelete(pet.id);
+        }}
+      >
         ❌
       </button>
     </li>
