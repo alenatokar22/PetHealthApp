@@ -1,0 +1,22 @@
+.theme-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.theme-toggle {
+  background: var(--card);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--accent);
+  color: white;
+}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import PetList from "./PetList";
 import PetForm from "./PetForm";
 import PetDetails from "./PetDetails";
+import ThemeToggle from "./ThemeToggle";
 import "../styles/pet.css";
 
 export default function PetHealthApp() {
@@ -51,6 +52,7 @@ export default function PetHealthApp() {
 
   return (
     <div className="pet-app">
+      <ThemeToggle />
       <header className="pet-header">
         <h1 className="pet-title">🦜 Мої улюбленці</h1>
       </header>
@@ -69,7 +71,7 @@ export default function PetHealthApp() {
               )}
             </div>
 
-            {showForm ? (
+            {!selectedPet && showForm ? (
               <section className="form-section appear">
                 <h2 className="section-title">
                   📋 Форма для додавання улюбленця
@@ -79,7 +81,9 @@ export default function PetHealthApp() {
                   onCancel={() => setShowForm(false)}
                 />
               </section>
-            ) : (
+            ) : null}
+
+            {!showForm && !selectedPet && (
               <PetList
                 pets={pets}
                 onDelete={handleDeletePet}
