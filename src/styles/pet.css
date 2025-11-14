@@ -85,10 +85,6 @@ button {
 }
 
 /* --- Заголовок --- */
-.pet-header {
-  text-align: center;
-  margin-bottom: 10px;
-}
 .pet-title {
   color: var(--accent);
   font-size: 1.6rem;
@@ -117,16 +113,6 @@ button {
   padding: 16px;
   margin-bottom: 16px;
 }
-
-/*.pet-form input,
-.pet-form select,
-.pet-form textarea {
-  background: var(--bg);
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 18px;
-  color: var(--text);
-}*/
 
 @media (prefers-color-scheme: dark) {
   .pet-form input,
@@ -164,6 +150,14 @@ button {
   font-weight: 600;
   color: var(--text);
   font-size: 1.1rem;
+}
+
+.pet-name-title {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text);
 }
 
 .pet-birth {

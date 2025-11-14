@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import NotesView from "./NotesView";
+import "../styles/PetDetails.css";
+import TreatmentView from "./TreatmentView";
 import AppointmentsView from "./AppointmentsView";
 import AnalysisView from "./AnalysisView";
 
@@ -7,7 +8,9 @@ export default function PetDetails({ pet, onBack }) {
   const [tab, setTab] = useState("info");
   const [editMode, setEditMode] = useState(false);
   const [form, setForm] = useState({ ...pet });
-  const [photo, setPhoto] = useState(() => localStorage.getItem(`photo_${pet.id}`) || "");
+  const [photo, setPhoto] = useState(
+    () => localStorage.getItem(`photo_${pet.id}`) || ""
+  );
 
   useEffect(() => {
     if (photo) localStorage.setItem(`photo_${pet.id}`, photo);
@@ -35,24 +38,25 @@ export default function PetDetails({ pet, onBack }) {
 
   return (
     <div className="pet-details">
-      {/* Верхня панель */}
-      <div className="details-topbar">
-        
-        <button className="btn-back" onClick={onBack}>← Назад</button>
-        {editMode && (
-          <>
-            <button className="btn-save" onClick={handleSave}>💾 Зберегти</button>
-            <button className="btn-cancel" onClick={() => setEditMode(false)}>✖ Скасувати</button>
-          </>
-        )}
+      <div className="pet-header">
+        <h2 className="pet-name-title">🦜 {pet.name}</h2>
+        <label className="photo-upload-header">
+          <input type="file" accept="image/*" onChange={handlePhotoUpload} />
+          {photo ? (
+            <img src={photo} alt="Pet" className="photo-header" />
+          ) : (
+            <div className="photo-placeholder">📷 Оберіть фото</div>
+          )}
+        </label>
       </div>
 
-      
+      <div className="back-container">
+        <button className="btn-back" onClick={onBack}>
+          ← Назад
+        </button>
+      </div>
 
-      {/* Вкладки */}
-      <h2 className="details-title">🦜 {pet.name}</h2>
       <div className="tabs top-tabs">
-        
         <button
           className={`tab-btn ${tab === "info" ? "active" : ""}`}
           onClick={() => setTab("info")}
@@ -60,10 +64,10 @@ export default function PetDetails({ pet, onBack }) {
           ℹ️ Інформація
         </button>
         <button
-          className={`tab-btn ${tab === "notes" ? "active" : ""}`}
-          onClick={() => setTab("notes")}
+          className={`tab-btn ${tab === "treatment" ? "active" : ""}`}
+          onClick={() => setTab("treatment")}
         >
-          ✏️ Нотатки
+          💊 Лікування
         </button>
         <button
           className={`tab-btn ${tab === "appointments" ? "active" : ""}`}
@@ -75,33 +79,38 @@ export default function PetDetails({ pet, onBack }) {
           className={`tab-btn ${tab === "analysis" ? "active" : ""}`}
           onClick={() => setTab("analysis")}
         >
-          🧪 Аналізи
+          ⚖️ Вага
         </button>
       </div>
 
-      {/* Вміст вкладок */}
       <div className="tab-content fade-in">
         {tab === "info" && (
           <div className="pet-info-card">
-            {/* Фото */}
-            <label className="photo-upload-header">
-              <input type="file" accept="image/*" onChange={handlePhotoUpload} />
-              {photo ? (
-                <img src={photo} alt="Pet" className="photo-header" />
-              ) : (
-                <div className="photo-placeholder">📷 Оберіть фото</div>
-              )}
-            </label>
-
             {!editMode ? (
               <>
-                <p><strong>Вид / порода:</strong> {pet.species || "—"}</p>
-                <p><strong>Колір:</strong> {pet.color || "—"}</p>
-                <p><strong>Стать:</strong> {pet.gender || "—"}</p>
-                <p><strong>Вага:</strong> {pet.weight ? `${pet.weight} г` : "—"}</p>
-                <p><strong>Дата народження:</strong> {pet.birth || "—"}</p>
+                <p>
+                  <strong>Вид / порода:</strong> {pet.species || "—"}
+                </p>
+                <p>
+                  <strong>Колір:</strong> {pet.color || "—"}
+                </p>
+                <p>
+                  <strong>Стать:</strong> {pet.gender || "—"}
+                </p>
+                <p>
+                  <strong>Вага:</strong> {pet.weight ? `${pet.weight} г` : "—"}
+                </p>
+                <p>
+                  <strong>Дата народження:</strong> {pet.birth || "—"}
+                </p>
+
                 <div className="info-buttons">
-                  <button className="btn-edit" onClick={() => setEditMode(true)}>✏️ Редагувати</button>
+                  <button
+                    className="btn-edit"
+                    onClick={() => setEditMode(true)}
+                  >
+                    ✏️ Редагувати
+                  </button>
                 </div>
               </>
             ) : (
@@ -142,12 +151,24 @@ export default function PetDetails({ pet, onBack }) {
                   value={form.birth}
                   onChange={(e) => handleChange("birth", e.target.value)}
                 />
+
+                <div className="form-buttons clean">
+                  <button className="btn-save" onClick={handleSave}>
+                    💾 Зберегти
+                  </button>
+                  <button
+                    className="btn-cancel"
+                    onClick={() => setEditMode(false)}
+                  >
+                    ❌ Скасувати
+                  </button>
+                </div>
               </div>
             )}
           </div>
         )}
 
-        {tab === "notes" && <NotesView pet={pet} />}
+        {tab === "treatment" && <TreatmentView pet={pet} />}
         {tab === "appointments" && <AppointmentsView pet={pet} />}
         {tab === "analysis" && <AnalysisView pet={pet} />}
       </div>

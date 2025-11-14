@@ -1,0 +1,141 @@
+.analysis-view {
+  margin-top: 10px;
+}
+
+.section-title {
+  text-align: center;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.weight-form {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.weight-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.weight-form input[type="date"],
+.weight-form input[type="number"] {
+  padding: 8px;
+  border: 1px solid #d5dce5;
+  border-radius: 8px;
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.card {
+  background: var(--card);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.weight-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.weight-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px dashed #e6eef7;
+}
+
+.weight-item:last-child {
+  border-bottom: none;
+}
+
+.weight-item.edit {
+  gap: 10px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-secondary {
+  background: #f1f5f9;
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.btn-save {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-cancel {
+  background: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.btn-copy {
+  background: #60a5fa;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-edit {
+  background: #fde047;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-delete {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 12px 0;
+}

@@ -1,0 +1,121 @@
+.treatment-view {
+  margin-top: 10px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 20px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.treatment-form {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.treatment-textarea {
+  padding: 8px;
+  border: 1px solid #d5dce5;
+  border-radius: 8px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input-block label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.input-block input {
+  padding: 8px;
+  border: 1px solid #d5dce5;
+  border-radius: 8px;
+}
+
+.btn-add {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-add:hover {
+  background: #2563eb;
+}
+
+.treatment-item {
+  display: flex;
+  justify-content: space-between;
+  background: var(--card);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+
+.edit-mode {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-save,
+.btn-cancel,
+.btn-del,
+.btn-copy {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background: #fde047;
+}
+
+.btn-save {
+  background: #22c55e;
+  color: white;
+}
+
+.btn-cancel {
+  background: #e2e8f0;
+}
+
+.btn-del {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-copy {
+  background: #60a5fa;
+  color: white;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 12px 0;
+}

@@ -1,0 +1,86 @@
+.appointments-container {
+  margin-top: 20px;
+}
+
+/* Форма */
+.appointment-form {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.photo-picker {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #e8f0ff;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.photo-picker input {
+  display: none;
+}
+
+.preview-photo {
+  width: 100%;
+  max-height: 180px;
+  margin-top: 10px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.btn-add {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: #4a7aff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Список */
+.appointment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.appointment-item {
+  background: var(--card);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 15px;
+}
+
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 7px;
+  cursor: pointer;
+}
+
+.appointment-photo {
+  width: 100%;
+  max-height: 220px; /* головне: компактно */
+  border-radius: 12px;
+  object-fit: cover; /* не спотворює фото */
+  display: block;
+  background: #f1f5f9;
+}

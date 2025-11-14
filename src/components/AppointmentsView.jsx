@@ -1,73 +1,107 @@
-import React, { useState } from "react";
-import NotesView from "./NotesView";
-import AppointmentsView from "./AppointmentsView";
-import AnalysisView from "./AnalysisView";
+import React, { useState, useEffect } from "react";
+import "../styles/appointments.css";
 
-export default function PetDetails({ pet, onBack }) {
-  const [tab, setTab] = useState("notes");
-  const [editMode, setEditMode] = useState(false);
-  const [form, setForm] = useState({ ...pet });
+export default function AppointmentsView({ pet }) {
+  const [appointments, setAppointments] = useState([]);
+  const [newDate, setNewDate] = useState("");
+  const [photo, setPhoto] = useState(null);
 
-  const handleSave = () => {
-    const pets = JSON.parse(localStorage.getItem("pets") || "[]");
-    const updated = pets.map((p) => (p.id === pet.id ? form : p));
-    localStorage.setItem("pets", JSON.stringify(updated));
-    setEditMode(false);
+  // Завантаження з localStorage
+  useEffect(() => {
+    const saved = JSON.parse(
+      localStorage.getItem(`appointments_${pet.id}`) || "[]"
+    );
+    setAppointments(saved);
+  }, [pet.id]);
+
+  // Збереження в localStorage
+  const saveAppointments = (data) => {
+    setAppointments(data);
+    localStorage.setItem(`appointments_${pet.id}`, JSON.stringify(data));
+  };
+
+  // Обробка фото
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => setPhoto(reader.result);
+    reader.readAsDataURL(file);
+  };
+
+  // Додавання запису
+  const addAppointment = () => {
+    if (!newDate || !photo) {
+      alert("Будь ласка, виберіть дату та фото!");
+      return;
+    }
+
+    const newItem = {
+      id: Date.now(),
+      date: newDate,
+      photo: photo,
+    };
+
+    const updated = [...appointments, newItem];
+    saveAppointments(updated);
+
+    // очищення
+    setNewDate("");
+    setPhoto(null);
+  };
+
+  // Видалення
+  const deleteAppointment = (id) => {
+    if (!confirm("Видалити фото прийому?")) return;
+    const updated = appointments.filter((a) => a.id !== id);
+    saveAppointments(updated);
   };
 
   return (
-    <div className="pet-details">
-      {!editMode ? (
-        <>
-          <div key={tab} className="tab-content fade-in">
-            {tab === "notes" && <NotesView pet={pet} />}
-            {tab === "appointments" && <AppointmentsView pet={pet} />}
-            {tab === "analysis" && <AnalysisView pet={pet} />}
-          </div>
-        </>
-      ) : (
-        <div className="edit-form">
-          <h3>Редагування улюбленця</h3>
-          <input
-            type="text"
-            placeholder="Ім’я"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Вид / порода"
-            value={form.species}
-            onChange={(e) => setForm({ ...form, species: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Колір"
-            value={form.color}
-            onChange={(e) => setForm({ ...form, color: e.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Вага (г)"
-            value={form.weight}
-            onChange={(e) => setForm({ ...form, weight: e.target.value })}
-          />
-          <input
-            type="date"
-            value={form.birth}
-            onChange={(e) => setForm({ ...form, birth: e.target.value })}
-          />
+    <div className="appointments-container">
+      {/* Форма додавання */}
+      <div className="appointment-form">
+        <h3>Додати фото прийому</h3>
 
-          <div className="form-buttons clean">
-            <button onClick={handleSave} className="btn-save">
-              💾 Зберегти
-            </button>
-            <button onClick={() => setEditMode(false)} className="btn-cancel">
-              ✖ Скасувати
-            </button>
-          </div>
-        </div>
-      )}
+        <input
+          type="date"
+          value={newDate}
+          onChange={(e) => setNewDate(e.target.value)}
+        />
+
+        <label className="photo-picker">
+          📷 Обрати фото
+          <input type="file" accept="image/*" onChange={handlePhotoUpload} />
+        </label>
+
+        {photo && <img src={photo} className="preview-photo" alt="preview" />}
+
+        <button className="btn-add" onClick={addAppointment}>
+          ➕ Додати
+        </button>
+      </div>
+
+      {/* Список */}
+      <ul className="appointment-list">
+        {appointments
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .map((item) => (
+            <li key={item.id} className="appointment-item">
+              <div className="appointment-header">
+                <strong>{item.date}</strong>
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteAppointment(item.id)}
+                >
+                  🗑
+                </button>
+              </div>
+
+              <img src={item.photo} alt="visit" className="appointment-photo" />
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }

@@ -54,7 +54,7 @@ export default function PetHealthApp() {
     <div className="pet-app">
       <ThemeToggle />
       <header className="pet-header">
-        <h1 className="pet-title">🦜 Мої улюбленці</h1>
+        {!selectedPet && <h2 className="page-title">🦜 Мої улюбленці</h2>}
       </header>
 
       <main className="pet-main">
