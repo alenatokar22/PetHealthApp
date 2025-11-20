@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Appointments.css";
+import "../styles/appointments.css";
 
 export default function AppointmentsView({ pet }) {
   const [appointments, setAppointments] = useState([]);
